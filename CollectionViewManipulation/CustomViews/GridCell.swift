@@ -8,49 +8,35 @@
 
 import UIKit
 
+/// View model for grid cell
 struct GridCellVM: Equatable {
     var number: Int
 }
 
-protocol GridCellDelegate {
-    func gridCell(_ cell: GridCell, panGestureDetected panGesture: UIPanGestureRecognizer)
-}
-
+/// Simple cell that displays a number
 class GridCell: UICollectionViewCell {
     
     @IBOutlet weak var label: UILabel!
-    var panGestureRecognizer: UIPanGestureRecognizer!
-//    var delegate: GridCellDelegate?
     
     var viewModel: GridCellVM!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    func commonInit() {
-//        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureDidPerform(gestureRecognizer:)))
-//        self.addGestureRecognizer(panGestureRecognizer)
     }
     
     func bind(vm: GridCellVM) {
         self.viewModel = vm
         if vm.number == 0 {
+            // 0 represents the empty position
             self.backgroundColor = UIColor.clear
             self.label.text = nil
         } else {
             self.backgroundColor = UIColor.white
             self.label.text = "\(vm.number)"
         }
-    }
-    
-    @objc func panGestureDidPerform(gestureRecognizer: UIPanGestureRecognizer) {
-//        delegate?.gridCell(self, panGestureDetected: gestureRecognizer)
     }
 }
