@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +14,103 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CollectionViewManipulation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EHC-MO-Ohl">
+                                <rect key="frame" x="16" y="162" width="343" height="343"/>
+                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EHC-MO-Ohl" secondAttribute="height" multiplier="1:1" id="zgz-0p-64M"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="iaF-7u-9tI">
+                                    <size key="itemSize" width="102" height="95"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="1" minY="1" maxX="1" maxY="1"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridCell" id="Ih5-uY-irf" customClass="GridCell" customModule="CollectionViewManipulation" customModuleProvider="target">
+                                        <rect key="frame" x="1" y="1" width="102" height="95"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="102" height="95"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYK-bg-S0d">
+                                                    <rect key="frame" x="47" y="37" width="8" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="gYK-bg-S0d" firstAttribute="centerX" secondItem="Ih5-uY-irf" secondAttribute="centerX" id="90e-xi-f5X"/>
+                                            <constraint firstItem="gYK-bg-S0d" firstAttribute="centerY" secondItem="Ih5-uY-irf" secondAttribute="centerY" id="V0R-jJ-p3E"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="label" destination="gYK-bg-S0d" id="3Mo-ME-wat"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="rAp-Fn-ICu"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="DN0-cd-wN8"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="EHC-MO-Ohl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0xR-df-r39"/>
+                            <constraint firstItem="EHC-MO-Ohl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="569-Pf-Bsa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EHC-MO-Ohl" secondAttribute="trailing" constant="16" id="CHg-bN-jVi"/>
+                            <constraint firstItem="EHC-MO-Ohl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="V1Z-wl-bCh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="EHC-MO-Ohl" secondAttribute="bottom" constant="16" id="YgJ-rm-L1w"/>
+                            <constraint firstItem="EHC-MO-Ohl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vte-Qf-Rh6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CHg-bN-jVi"/>
+                                <exclude reference="YgJ-rm-L1w"/>
+                                <exclude reference="0xR-df-r39"/>
+                                <exclude reference="569-Pf-Bsa"/>
+                                <exclude reference="V1Z-wl-bCh"/>
+                                <exclude reference="vte-Qf-Rh6"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="YgJ-rm-L1w"/>
+                                <include reference="569-Pf-Bsa"/>
+                                <include reference="vte-Qf-Rh6"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="constraints">
+                                <include reference="CHg-bN-jVi"/>
+                                <include reference="0xR-df-r39"/>
+                                <include reference="V1Z-wl-bCh"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Mfh-uV-mtm" appends="YES" id="WNe-g0-9lA"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="EHC-MO-Ohl" id="ytE-Vj-KIq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Mfh-uV-mtm"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="TnD-Sf-bfd"/>
             </objects>
+            <point key="canvasLocation" x="117.39130434782609" y="117.59999999999999"/>
         </scene>
     </scenes>
 </document>
