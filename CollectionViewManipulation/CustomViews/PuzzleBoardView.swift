@@ -36,7 +36,7 @@ class PuzzleBoardView: UICollectionView {
         }
     }
     
-    @IBInspectable var gameSize = 7
+    @IBInspectable var gameSize = 5
     var cellVMs: [GridCellVM]!
     
     // Variables used during a movement
@@ -85,7 +85,7 @@ extension PuzzleBoardView {
         case .up:
             return (idx - gameSize) < 0 ? nil : IndexPath(item: idx - gameSize, section: indexPath.section)
         case .down:
-            return (idx + gameSize) > gameSize * gameSize ? nil : IndexPath(item: idx + gameSize, section: indexPath.section)
+            return (idx + gameSize) >= gameSize * gameSize ? nil : IndexPath(item: idx + gameSize, section: indexPath.section)
         case .left:
             return (idx % gameSize) == 0 ? nil : IndexPath(item: idx - 1, section: indexPath.section)
         case .right:
