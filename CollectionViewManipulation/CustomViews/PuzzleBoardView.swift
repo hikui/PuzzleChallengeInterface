@@ -40,10 +40,15 @@ class PuzzleBoardView: UICollectionView {
     var cellVMs: [GridCellVM]!
     
     // Variables used during a movement
+    // The indexPath of the cell being moved
     var movingIndexPath: IndexPath?
+    // The cell being moved
     var movingCell: UICollectionViewCell?
+    // The destimation indexPath that the current cell is being moved to
     var targetIndexPath: IndexPath?
+    // The target cell will eventually be swapped for the moving cell
     var targetCell: UICollectionViewCell?
+    // The snapshot view for the moving cell. This view "fakes" the animation
     var cellSnapshot: UIView?
     
     lazy var customPanGestureRecognizer: UIPanGestureRecognizer = {
@@ -68,7 +73,7 @@ class PuzzleBoardView: UICollectionView {
 // MARK: - Helper functions
 extension PuzzleBoardView {
     
-    /// Given an indexPath, tell the target indexPath after moving with given direction
+    /// Given an indexPath, tells the target indexPath after moving with given direction
     ///
     /// - Parameters:
     ///   - indexPath: current index path
@@ -88,7 +93,7 @@ extension PuzzleBoardView {
         }
     }
     
-    /// Given an indexPath, tell which direction can it be moved.
+    /// Given an indexPath, tells which direction can it be moved.
     ///
     /// - Parameter indexPath: current index path
     /// - Returns: the direction it can be moved to. Returns nil if it can't be moved.
@@ -178,18 +183,21 @@ extension PuzzleBoardView {
                 return
         }
         
+        // Compute the current position of the "fake" cell
         let deltaX = movingSnapshot.center.x - movingCell.center.x
         let deltaY = movingSnapshot.center.y - movingCell.center.y
         
         let direction = MoveDirection.from(vector: CGVector(dx: deltaX, dy: deltaY))
         
         var shouldComplete = false
+        // Complete the half-way movement
         if (direction.isVertical()) && abs(deltaY) > movingCell.frame.size.height / 2 {
             shouldComplete = true
         } else if (direction.isHorizontal()) && abs(deltaX) > movingCell.frame.size.width / 2 {
             shouldComplete = true
         }
         
+        // If the position is less than half-way, the cell will be moved back
         var targetIndexPath = movingIndexPath
         if shouldComplete {
             targetIndexPath = indexPath(fromIndexPath: movingIndexPath, direction: direction) ?? movingIndexPath
@@ -227,6 +235,9 @@ extension PuzzleBoardView {
         // diffX > 0 : target is on the right
         let diffX = targetCell.center.x - movingCell.center.x
         
+        // Determine the possible range of the gesture translation
+        // For example, if the empty position is on the left side of the current tile,
+        // then the leftMostTranslation should be diffX and the rightMostTranslation should be 0(can't move to right)
         let leftMostTranslation = diffX > 0 ? 0 : diffX
         let rightMostTranslation = diffX > 0 ? diffX : 0
         let topMostTranslation = diffY > 0 ? 0 : diffY
